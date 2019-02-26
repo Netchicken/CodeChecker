@@ -58,8 +58,8 @@ namespace CodeChecker
 
             //files and their contents added to the dictionary
             Dictionary<string, string> AllFiles = new Dictionary<string, string>();
-            //holds a record of found matches to stop them appearing twice
-            List<string> FoundMatches = new List<string>();
+            //holds a record of  matches to stop them appearing twice
+            List<string> NotRepeatingMatches = new List<string>();
             int count = 0;
 
             var Lev = new Levenshtein();
@@ -103,10 +103,10 @@ namespace CodeChecker
                         string textShort1 = text.Key.Substring(text.Key.LastIndexOf(@"\") - 25);
 
                         //only compare files where the path is not exactly the same so we don't have the same person. && Don't run matches that have already been done
-                        if (ShortText1 != ShortText2 && !FoundMatches.Contains(text.Key + text2.Key))
+                        if (ShortText1 != ShortText2 && !NotRepeatingMatches.Contains(text.Key + text2.Key))
 
                         {//add the keys in reverse order so we can check them later (or earlier)
-                            FoundMatches.Add(text2.Key + text.Key);
+                            NotRepeatingMatches.Add(text2.Key + text.Key);
 
                             double levDist = Lev.Distance(text.Value, text2.Value);
 
@@ -121,14 +121,14 @@ namespace CodeChecker
 
                                 lbxOutput.Items.Add(levDist.ToString() + "  -- " + textShort1 + " --  -- " + textShort2);
 
-                                FoundMatches.Add(levDist.ToString() + " | " + text.Key + " --  -- " + text2.Key);
+                                FoundMatches.Add(levDist.ToString() + " | " + text.Key + " -- MATCHES WITH  -- " + text2.Key);
                             }
 
                         }
                     }
                 }
                 //output to screen
-                //  lbxOutput.Items.Insert(0, "Matches will Appear TWICE");
+                lbxOutput.Items.Insert(0, "Search Completed!");
                 //   lbxOutput.Items.AddRange(FoundMatches.ToArray());
 
             }
