@@ -29,8 +29,13 @@ namespace CodeChecker
             InitializeComponent();
         }
 
-        private void BtnOpenDirectory_Click(object sender, EventArgs e)
+        private async void BtnOpenDirectory_Click(object sender, EventArgs e)
         {
+            //clears out old entries
+            ExtractFiles.AllFiles.Clear();
+            Reset();
+
+
             MessageBox.Show("Click on a File in the Folder that holds all the assessments to get the path");
 
             if (ofd.ShowDialog() == DialogResult.OK)
@@ -38,26 +43,45 @@ namespace CodeChecker
                 if (File.Exists(ofd.FileName))
                 { //https://stackoverflow.com/questions/439007/extracting-path-from-openfiledialog-path-filename
 
-                    ops.docPath = Path.GetDirectoryName(ofd.FileName);
+                    // ops.docPath = Path.GetDirectoryName(ofd.FileName);
+                    ExtractFiles.docPath = Path.GetDirectoryName(ofd.FileName);
                 }
             }
+            this.Text = ExtractFiles.docPath;
+            await ExtractFiles.ExtractFilePaths().ConfigureAwait(false);
+
+            this.Text = "Found " + ExtractFiles.AllFiles.Count.ToString() + " files";
+
+            if (ExtractFiles.AllFiles.Count > 0)
+            {
+                btnRnPlagCheck.Enabled = true;
+            }
+
+
         }
+
+
+        private void Reset()
+        {
+            if (ops.FoundMatches.Count > 0 || lbxOutput.Items.Count > 0)
+            {
+                ops.FoundMatches.Clear();
+                ExtractFiles.AllFiles.Clear();
+                lbxOutput.Items.Clear();
+            }
+
+        }
+
+
+        //run the plagarism checker
         private async void BtnPlagarism_Click(object sender, EventArgs e)
         {
 
-            if (ops.FoundMatches.Count > 0)
-            {
-                ops.FoundMatches.Clear();
-
-            }
-            ops.AllFiles.Clear();
-            lbxOutput.Items.Clear();
-            //   
-            this.Text = ops.docPath;
+            Reset();
             int LevSize = Convert.ToInt32(txtLevSize.Text);
-            Boolean IsContains = cbxContains.Checked;
+            Boolean IsContains = ExtractFiles.isIncluded; //cbxContains.Checked;
 
-            this.Text = "Working ... be patient, its big ...or your machine is slow";
+            this.Text += " - Be patient, its big ...or your machine is slow";
 
             //"Similar File Matches found ... " + count + " of Total files " + AllFiles.Count + " ... now checking similarity ... " + levDist.ToString();
 
@@ -77,12 +101,6 @@ namespace CodeChecker
                 lbxOutput.Items.Insert(0, "Search Completed!");
                 lbxOutput.Items.AddRange(ops.ScreenResults.ToArray());
             }));
-
-
-
-
-
-
         }
 
         private async Task RunGetAllFilesAysnc(int LevSize, bool IsContains)
@@ -102,7 +120,73 @@ namespace CodeChecker
             MessageBox.Show(ops.PrintResults());
         }
 
+        private void All_CheckedChanged(object sender, EventArgs e)
+        {//generate a fake checkbox
+            CheckBox fakeCB = new CheckBox();
+            //pass across the data from the activated checkbox
+            fakeCB = (CheckBox)sender;
+            //check if its true
+            if (fakeCB.Checked == true)
+            {
+                switch (fakeCB.Text)
+                {
+                    case "HTML":
+                        ExtractFiles.isHTML = true;
+                        break;
+                    case "JS":
+                        ExtractFiles.isJS = true;
+                        break;
+                    case "CSS":
+                        ExtractFiles.isCSS = true;
+                        break;
+                    case "CSharp":
+                        ExtractFiles.isCSharp = true;
+                        break;
+                    case "Contains Files":
+                        ExtractFiles.isIncluded = true;
+                        break;
+                }
 
+
+            }
+            else if (fakeCB.Checked == false)
+            {
+                switch (fakeCB.Text)
+                {
+                    case "HTML":
+                        ExtractFiles.isHTML = false;
+                        break;
+                    case "JS":
+                        ExtractFiles.isJS = false;
+                        break;
+                    case "CSS":
+                        ExtractFiles.isCSS = false;
+                        break;
+                    case "CSharp":
+                        ExtractFiles.isCSharp = false;
+                        break;
+                    case "Contains Files":
+                        ExtractFiles.isIncluded = true;
+                        break;
+                }
+
+
+            }
+
+            //only enable the button if there is a file type selected
+            if (ExtractFiles.isCSharp || ExtractFiles.isCSS || ExtractFiles.isHTML || ExtractFiles.isJS)
+            {
+                //   btnRnPlagCheck.Enabled = true;
+                btnOpenDirectory.Enabled = true;
+            }
+            else
+            {
+                //  btnRnPlagCheck.Enabled = false;
+                btnOpenDirectory.Enabled = false;
+                MessageBox.Show("Enable a file type checkbox first");
+            }
+
+        }
     }
 
 

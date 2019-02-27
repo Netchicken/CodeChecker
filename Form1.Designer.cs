@@ -28,32 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnPlagarism = new System.Windows.Forms.Button();
+            this.btnRnPlagCheck = new System.Windows.Forms.Button();
             this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.lbxOutput = new System.Windows.Forms.ListBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.cbxHTML = new System.Windows.Forms.CheckBox();
+            this.cbxJS = new System.Windows.Forms.CheckBox();
+            this.cbxCSS = new System.Windows.Forms.CheckBox();
+            this.cbxCS = new System.Windows.Forms.CheckBox();
+            this.cbxContains = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtLevSize = new System.Windows.Forms.TextBox();
-            this.cbxContains = new System.Windows.Forms.CheckBox();
             this.btnOpenDirectory = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnPlagarism
+            // btnRnPlagCheck
             // 
-            this.btnPlagarism.Location = new System.Drawing.Point(3, 702);
-            this.btnPlagarism.Name = "btnPlagarism";
-            this.btnPlagarism.Size = new System.Drawing.Size(314, 178);
-            this.btnPlagarism.TabIndex = 0;
-            this.btnPlagarism.Text = "Check Files";
-            this.btnPlagarism.UseVisualStyleBackColor = true;
-            this.btnPlagarism.Click += new System.EventHandler(this.BtnPlagarism_Click);
+            this.btnRnPlagCheck.Enabled = false;
+            this.btnRnPlagCheck.Location = new System.Drawing.Point(3, 397);
+            this.btnRnPlagCheck.Name = "btnRnPlagCheck";
+            this.btnRnPlagCheck.Size = new System.Drawing.Size(314, 178);
+            this.btnRnPlagCheck.TabIndex = 0;
+            this.btnRnPlagCheck.Text = "Check Files";
+            this.btnRnPlagCheck.UseVisualStyleBackColor = true;
+            this.btnRnPlagCheck.Click += new System.EventHandler(this.BtnPlagarism_Click);
             // 
             // ofd
             // 
@@ -78,6 +85,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.flowLayoutPanel2);
             this.splitContainer1.Panel1.Controls.Add(this.lbxOutput);
             // 
             // splitContainer1.Panel2
@@ -87,13 +95,81 @@
             this.splitContainer1.SplitterDistance = 2334;
             this.splitContainer1.TabIndex = 2;
             // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Controls.Add(this.cbxHTML);
+            this.flowLayoutPanel2.Controls.Add(this.cbxJS);
+            this.flowLayoutPanel2.Controls.Add(this.cbxCSS);
+            this.flowLayoutPanel2.Controls.Add(this.cbxCS);
+            this.flowLayoutPanel2.Controls.Add(this.cbxContains);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 1052);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(2334, 100);
+            this.flowLayoutPanel2.TabIndex = 2;
+            // 
+            // cbxHTML
+            // 
+            this.cbxHTML.AutoSize = true;
+            this.cbxHTML.Location = new System.Drawing.Point(3, 3);
+            this.cbxHTML.Name = "cbxHTML";
+            this.cbxHTML.Size = new System.Drawing.Size(169, 48);
+            this.cbxHTML.TabIndex = 0;
+            this.cbxHTML.Text = "HTML";
+            this.cbxHTML.UseVisualStyleBackColor = true;
+            this.cbxHTML.CheckedChanged += new System.EventHandler(this.All_CheckedChanged);
+            // 
+            // cbxJS
+            // 
+            this.cbxJS.AutoSize = true;
+            this.cbxJS.Location = new System.Drawing.Point(178, 3);
+            this.cbxJS.Name = "cbxJS";
+            this.cbxJS.Size = new System.Drawing.Size(110, 48);
+            this.cbxJS.TabIndex = 1;
+            this.cbxJS.Text = "JS";
+            this.cbxJS.UseVisualStyleBackColor = true;
+            this.cbxJS.CheckedChanged += new System.EventHandler(this.All_CheckedChanged);
+            // 
+            // cbxCSS
+            // 
+            this.cbxCSS.AutoSize = true;
+            this.cbxCSS.Location = new System.Drawing.Point(294, 3);
+            this.cbxCSS.Name = "cbxCSS";
+            this.cbxCSS.Size = new System.Drawing.Size(143, 48);
+            this.cbxCSS.TabIndex = 2;
+            this.cbxCSS.Text = "CSS";
+            this.cbxCSS.UseVisualStyleBackColor = true;
+            this.cbxCSS.CheckedChanged += new System.EventHandler(this.All_CheckedChanged);
+            // 
+            // cbxCS
+            // 
+            this.cbxCS.AutoSize = true;
+            this.cbxCS.Location = new System.Drawing.Point(443, 3);
+            this.cbxCS.Name = "cbxCS";
+            this.cbxCS.Size = new System.Drawing.Size(194, 48);
+            this.cbxCS.TabIndex = 3;
+            this.cbxCS.Text = "CSharp";
+            this.cbxCS.UseVisualStyleBackColor = true;
+            this.cbxCS.CheckedChanged += new System.EventHandler(this.All_CheckedChanged);
+            // 
+            // cbxContains
+            // 
+            this.cbxContains.AutoSize = true;
+            this.cbxContains.Location = new System.Drawing.Point(643, 3);
+            this.cbxContains.Name = "cbxContains";
+            this.cbxContains.Size = new System.Drawing.Size(307, 48);
+            this.cbxContains.TabIndex = 5;
+            this.cbxContains.Text = "Contains Files";
+            this.cbxContains.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.cbxContains.UseVisualStyleBackColor = true;
+            this.cbxContains.CheckedChanged += new System.EventHandler(this.All_CheckedChanged);
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.label1);
             this.flowLayoutPanel1.Controls.Add(this.txtLevSize);
-            this.flowLayoutPanel1.Controls.Add(this.cbxContains);
             this.flowLayoutPanel1.Controls.Add(this.btnOpenDirectory);
-            this.flowLayoutPanel1.Controls.Add(this.btnPlagarism);
+            this.flowLayoutPanel1.Controls.Add(this.btnRnPlagCheck);
             this.flowLayoutPanel1.Controls.Add(this.btnPrint);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -118,19 +194,10 @@
             this.txtLevSize.TabIndex = 4;
             this.txtLevSize.Text = "300";
             // 
-            // cbxContains
-            // 
-            this.cbxContains.Location = new System.Drawing.Point(3, 190);
-            this.cbxContains.Name = "cbxContains";
-            this.cbxContains.Size = new System.Drawing.Size(293, 299);
-            this.cbxContains.TabIndex = 5;
-            this.cbxContains.Text = "Include Where one file contains another file";
-            this.cbxContains.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.cbxContains.UseVisualStyleBackColor = true;
-            // 
             // btnOpenDirectory
             // 
-            this.btnOpenDirectory.Location = new System.Drawing.Point(3, 495);
+            this.btnOpenDirectory.Enabled = false;
+            this.btnOpenDirectory.Location = new System.Drawing.Point(3, 190);
             this.btnOpenDirectory.Name = "btnOpenDirectory";
             this.btnOpenDirectory.Size = new System.Drawing.Size(314, 201);
             this.btnOpenDirectory.TabIndex = 2;
@@ -140,7 +207,7 @@
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(3, 886);
+            this.btnPrint.Location = new System.Drawing.Point(3, 581);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(314, 201);
             this.btnPrint.TabIndex = 1;
@@ -160,6 +227,8 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -168,7 +237,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnPlagarism;
+        private System.Windows.Forms.Button btnRnPlagCheck;
         private System.Windows.Forms.OpenFileDialog ofd;
         private System.Windows.Forms.ListBox lbxOutput;
         private System.Windows.Forms.SplitContainer splitContainer1;
@@ -178,6 +247,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtLevSize;
         private System.Windows.Forms.CheckBox cbxContains;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.CheckBox cbxHTML;
+        private System.Windows.Forms.CheckBox cbxJS;
+        private System.Windows.Forms.CheckBox cbxCSS;
+        private System.Windows.Forms.CheckBox cbxCS;
     }
 }
 
