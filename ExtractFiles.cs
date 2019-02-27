@@ -16,6 +16,7 @@ namespace CodeChecker
         public static Boolean isCSS = false;
         public static Boolean isCSharp = false;
         public static Boolean isIncluded = false;
+        public static Boolean isSameFolder = false;
 
         public static string docPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 

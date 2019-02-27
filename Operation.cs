@@ -44,9 +44,8 @@ namespace CodeChecker
 
         //}
 
-        public void GetAllFiles(int LevSize, Boolean IsContains)
+        public void RunLev(int LevSize, Boolean IsContains)
         {
-
             List<double> LEVDistance = new List<double>();
 
             //holds a record of  matches to stop them appearing twice
@@ -55,32 +54,30 @@ namespace CodeChecker
             var Lev = new Levenshtein();
             try
             {
-                //ExtractFilePaths();
-
                 foreach (var text in ExtractFiles.AllFiles)
                 {
-                    //get a short path without the filename
-                    int LastSlashText1 = text.Key.Length - text.Key.LastIndexOf(@"\");
-                    string ShortText1 = text.Key.Substring(0, text.Key.Length - LastSlashText1);
+                    //get a short path without the filename for path comparisons
+                    string FolderPathNoFile1 = GetShortPath(text.Key);
+                    //short string to appear in file on screen
 
                     foreach (var text2 in ExtractFiles.AllFiles)
                     {
-                        //everything wrappted in this to check that we haven't compared these two files before
+                        //everything wrapped in this to check that we haven't compared these two files before in this loop
                         if (!NotRepeatingMatches.Contains(text.Key + text2.Key))
                         {
-
-
-
-
                             //need this to stop it crashing
                             System.Threading.Thread.CurrentThread.Join(10);
 
-                            //get a short path without the filename
-                            int LastSlashText2 = text2.Key.Length - text2.Key.LastIndexOf(@"\");
-                            string ShortText2 = text2.Key.Substring(0, text2.Key.Length - LastSlashText2);
+                            //get shorttext to stop files in same path being checked 
+                            string FolderPathNoFile2 = GetShortPath(text2.Key);
 
-                            //short string to appear in file? on screen
-                            string textShort1 = text.Key.Substring(text.Key.LastIndexOf(@"\") - 25);
+                            //if I want to compare files in the same folder then shorttext comparison must be FALSE so it thinks they are different folders
+                            if (ExtractFiles.isSameFolder)
+                            {
+                                FolderPathNoFile2 = "Some Random value to fool checker thats its a different file";
+                            }
+
+
 
                             //need to do contains before the rest as we stop repeats with NotRepeatingMatches
                             Boolean TContainsT2 = false;
@@ -91,38 +88,29 @@ namespace CodeChecker
                                 T2ContainsT = text2.Value.Contains(text.Value);
                             }
 
-                            if (IsContains && (text.Key != text2.Key) && (TContainsT2 || T2ContainsT))
+                            if (IsContains && (text.Key != text2.Key) && (TContainsT2 || T2ContainsT) && (FolderPathNoFile1 != FolderPathNoFile2))
                             {
                                 count++;
 
-                                //short string to appear in file? on screen
-                                string textShort2 = text2.Key.Substring(text2.Key.LastIndexOf(@"\") - 25);
-
-                                ScreenResults.Add("Contains Text  -- " + textShort1 + " --  -- " + textShort2);
+                                ScreenResults.Add("Contains Text  -- " + GetShortPathWithFileName(text.Key) + " --  -- " + GetShortPathWithFileName(text2.Key));
 
                                 FoundMatches.Add("Contains Text  | " + text.Key + " -- MATCHES WITH  -- " + text2.Key + @"\n\n");
                             }
 
                             //only compare files where the path is not exactly the same so we don't have the same person. && Don't run matches that have already been done
-                            if ((text.Key != text2.Key) && !NotRepeatingMatches.Contains(text.Key + text2.Key) && ShortText1 != ShortText2)
-
+                            if ((text.Key != text2.Key) && !NotRepeatingMatches.Contains(text.Key + text2.Key) && (FolderPathNoFile1 != FolderPathNoFile2))
                             {
-
                                 double levDist = Lev.Distance(text.Value, text2.Value);
-
-                                // this.Text = "Similar File Matches found ... " + count + " of Total files " + AllFiles.Count + " ... now checking similarity ... " + levDist.ToString();
 
                                 if (levDist < LevSize)
                                 {
                                     count++;
 
-                                    //short string to appear in file? on screen
-                                    string textShort2 = text2.Key.Substring(text2.Key.LastIndexOf(@"\") - 25);
-
-                                    ScreenResults.Add(levDist.ToString() + "  -- " + textShort1 + " --  -- " + textShort2);
+                                    ScreenResults.Add(levDist.ToString() + "  -- " + GetShortPathWithFileName(text.Key) + " --  -- " + GetShortPathWithFileName(text2.Key));
 
                                     FoundMatches.Add(levDist.ToString() + " | " + text.Key + " -- MATCHES WITH  -- " + text2.Key + @"\n\n");
                                 }
+
 
                             }
                             //add the keys in reverse order so we can check them later (or earlier)to filter out matches that have been done
@@ -145,8 +133,27 @@ namespace CodeChecker
 
             //});
         }
+        /// <summary>
+        /// Short path without file name used to check if the files come from the same folder
+        /// </summary>
+        /// <param name="text">path</param>
+        /// <returns></returns>
+        private string GetShortPath(string text)
+        {
+            //get a short path without the filename for path comparisons
+            int LastSlashText1 = text.Length - text.LastIndexOf(@"\");
+            return text.Substring(0, text.Length - LastSlashText1);
 
-
+        }
+        /// <summary>
+        /// Short string to appear on screen with file name but beginning truncated
+        /// </summary>
+        /// <param name="text">path</param>
+        /// <returns></returns>
+        private string GetShortPathWithFileName(string text)
+        {
+            return text.Substring(text.LastIndexOf(@"\") - 25);
+        }
 
         /// <summary>
         /// Print out the data 

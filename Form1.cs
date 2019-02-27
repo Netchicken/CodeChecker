@@ -21,9 +21,6 @@ namespace CodeChecker
         Operation ops = new Operation();
 
 
-        //   List<string> FoundMatches = new List<string>();
-        // string docPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
         public Form1()
         {
             InitializeComponent();
@@ -32,9 +29,9 @@ namespace CodeChecker
         private async void BtnOpenDirectory_Click(object sender, EventArgs e)
         {
             //clears out old entries
+            // ops = new Operation();
             ExtractFiles.AllFiles.Clear();
             Reset();
-
 
             MessageBox.Show("Click on a File in the Folder that holds all the assessments to get the path");
 
@@ -56,11 +53,7 @@ namespace CodeChecker
             {
                 btnRnPlagCheck.Enabled = true;
             }
-
-
         }
-
-
         private void Reset()
         {
             if (ops.FoundMatches.Count > 0 || lbxOutput.Items.Count > 0)
@@ -69,10 +62,7 @@ namespace CodeChecker
                 ExtractFiles.AllFiles.Clear();
                 lbxOutput.Items.Clear();
             }
-
         }
-
-
         //run the plagarism checker
         private async void BtnPlagarism_Click(object sender, EventArgs e)
         {
@@ -90,7 +80,7 @@ namespace CodeChecker
             // RunGetAllFilesAysnc(LevSize, IsContains);
             lbxOutput.Items.Insert(0, "Searching ...");
 
-            await Task.Run(() => ops.GetAllFiles(LevSize, IsContains)).ConfigureAwait(false);
+            await Task.Run(() => ops.RunLev(LevSize, IsContains)).ConfigureAwait(false);
 
             //https://stackoverflow.com/questions/142003/cross-thread-operation-not-valid-control-accessed-from-a-thread-other-than-the
 
@@ -103,11 +93,12 @@ namespace CodeChecker
             }));
         }
 
+        //runs the Lev method, async to stop it from locking the form to the screen
         private async Task RunGetAllFilesAysnc(int LevSize, bool IsContains)
         {
             //https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.run?view=netframework-4.7.2
 
-            await Task.Run(() => ops.GetAllFiles(LevSize, IsContains)).ConfigureAwait(false);
+            await Task.Run(() => ops.RunLev(LevSize, IsContains)).ConfigureAwait(false);
             lbxOutput.Items.Insert(0, "Searching ...");
 
             // Task.Wait();
@@ -145,6 +136,9 @@ namespace CodeChecker
                     case "Contains Files":
                         ExtractFiles.isIncluded = true;
                         break;
+                    case "Same Folder":
+                        ExtractFiles.isSameFolder = true;
+                        break;
                 }
 
 
@@ -166,7 +160,10 @@ namespace CodeChecker
                         ExtractFiles.isCSharp = false;
                         break;
                     case "Contains Files":
-                        ExtractFiles.isIncluded = true;
+                        ExtractFiles.isIncluded = false;
+                        break;
+                    case "Same Folder":
+                        ExtractFiles.isSameFolder = false;
                         break;
                 }
 

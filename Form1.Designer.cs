@@ -43,6 +43,7 @@
             this.txtLevSize = new System.Windows.Forms.TextBox();
             this.btnOpenDirectory = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
+            this.cbxSameFolder = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -102,6 +103,7 @@
             this.flowLayoutPanel2.Controls.Add(this.cbxCSS);
             this.flowLayoutPanel2.Controls.Add(this.cbxCS);
             this.flowLayoutPanel2.Controls.Add(this.cbxContains);
+            this.flowLayoutPanel2.Controls.Add(this.cbxSameFolder);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 1052);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
@@ -215,6 +217,17 @@
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.BtnPrint_Click);
             // 
+            // cbxSameFolder
+            // 
+            this.cbxSameFolder.AutoSize = true;
+            this.cbxSameFolder.Location = new System.Drawing.Point(956, 3);
+            this.cbxSameFolder.Name = "cbxSameFolder";
+            this.cbxSameFolder.Size = new System.Drawing.Size(284, 48);
+            this.cbxSameFolder.TabIndex = 6;
+            this.cbxSameFolder.Text = "Same Folder";
+            this.cbxSameFolder.UseVisualStyleBackColor = true;
+            this.cbxSameFolder.CheckedChanged += new System.EventHandler(this.All_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(22F, 42F);
@@ -252,6 +265,7 @@
         private System.Windows.Forms.CheckBox cbxJS;
         private System.Windows.Forms.CheckBox cbxCSS;
         private System.Windows.Forms.CheckBox cbxCS;
+        private System.Windows.Forms.CheckBox cbxSameFolder;
     }
 }
 
