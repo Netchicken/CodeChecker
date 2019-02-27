@@ -7,20 +7,23 @@ using System.Threading.Tasks;
 
 namespace CodeChecker
 {
+    using F23.StringSimilarity;
+
     public class Operation
     {
         public string Text { get; set; }
         public string Text2 { get; set; }
-
+        //files and their contents added to the dictionary
         public Dictionary<string, string> AllFiles = new Dictionary<string, string>();
 
         public List<string> FoundMatches = new List<string>();
         public string docPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
+        public List<string> ScreenResults = new List<string>();
 
         public void ExtractFilePaths()
         { //files and their contents added to the dictionary
-          // Dictionary<string, string> AllFiles = new Dictionary<string, string>();
+
             var files = Directory.EnumerateFiles(docPath, "*.cs", SearchOption.AllDirectories);
 
             foreach (var f in files)
@@ -37,6 +40,129 @@ namespace CodeChecker
                         AllFiles.Add(f, text);
                     }
                 }
+            }
+
+        }
+
+        public void GetAllFiles(int LevSize, Boolean IsContains)
+        {
+            //await Task.Run(() =>
+            // {
+
+            List<double> LEVDistance = new List<double>();
+
+            //holds a record of  matches to stop them appearing twice
+            List<string> NotRepeatingMatches = new List<string>();
+            int count = 0;
+            var Lev = new Levenshtein();
+            try
+            {
+                ExtractFilePaths();
+
+                foreach (var text in AllFiles)
+                {
+                    //get a short path without the filename
+                    int LastSlashText1 = text.Key.Length - text.Key.LastIndexOf(@"\");
+                    string ShortText1 = text.Key.Substring(0, text.Key.Length - LastSlashText1);
+
+                    foreach (var text2 in AllFiles)
+                    {
+
+                        //need this to stop it crashing
+                        System.Threading.Thread.CurrentThread.Join(10);
+
+                        //get a short path without the filename
+                        int LastSlashText2 = text2.Key.Length - text2.Key.LastIndexOf(@"\");
+                        string ShortText2 = text2.Key.Substring(0, text2.Key.Length - LastSlashText2);
+
+                        //short string to appear in file? on screen
+                        string textShort1 = text.Key.Substring(text.Key.LastIndexOf(@"\") - 25);
+
+                        //need to do contains before the rest as we stop repeats with NotRepeatingMatches
+                        Boolean TContainsT2 = false;
+                        Boolean T2ContainsT = false;
+                        if (IsContains) //do it here so it only runs when contains = true and doesn't slow down loop
+                        {
+                            TContainsT2 = text.Value.Contains(text2.Value);
+                            T2ContainsT = text2.Value.Contains(text.Value);
+                        }
+
+                        if (IsContains && (text.Key != text2.Key) && (TContainsT2 || T2ContainsT))
+                        {
+                            count++;
+
+                            //short string to appear in file? on screen
+                            string textShort2 = text2.Key.Substring(text2.Key.LastIndexOf(@"\") - 25);
+
+                            ScreenResults.Add("Contains Text  -- " + textShort1 + " --  -- " + textShort2);
+
+                            FoundMatches.Add("Contains Text  | " + text.Key + " -- MATCHES WITH  -- " + text2.Key + @"\n\n");
+                        }
+
+                        //only compare files where the path is not exactly the same so we don't have the same person. && Don't run matches that have already been done
+                        if ((text.Key != text2.Key) && !NotRepeatingMatches.Contains(text.Key + text2.Key) && ShortText1 != ShortText2)
+
+                        {//add the keys in reverse order so we can check them later (or earlier)
+                            NotRepeatingMatches.Add(text2.Key + text.Key);
+                            double levDist = Lev.Distance(text.Value, text2.Value);
+
+                            // this.Text = "Similar File Matches found ... " + count + " of Total files " + AllFiles.Count + " ... now checking similarity ... " + levDist.ToString();
+
+                            if (levDist < LevSize)
+                            {
+                                count++;
+
+                                //short string to appear in file? on screen
+                                string textShort2 = text2.Key.Substring(text2.Key.LastIndexOf(@"\") - 25);
+
+                                ScreenResults.Add(levDist.ToString() + "  -- " + textShort1 + " --  -- " + textShort2);
+
+                                FoundMatches.Add(levDist.ToString() + " | " + text.Key + " -- MATCHES WITH  -- " + text2.Key + @"\n\n");
+                            }
+
+                        }
+                    }
+                }
+
+
+            }
+            catch (UnauthorizedAccessException uAEx)
+            {
+                Console.WriteLine(uAEx.Message);
+            }
+            catch (PathTooLongException pathEx)
+            {
+                Console.WriteLine(pathEx.Message);
+            }
+
+
+            //});
+        }
+
+
+
+        /// <summary>
+        /// Print out the data 
+        /// </summary>
+        /// <returns>Success / error message</returns>
+        public string PrintResults()
+        {
+            try
+            {
+                string PathTitle = "Plagarism-Matches.txt";
+
+                string path = Directory.GetCurrentDirectory();
+                string docPath =
+                    Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+                //https://docs.microsoft.com/en-us/dotnet/api/system.io.file.writealllines?view=netframework-4.7.2
+                File.WriteAllLines(Path.Combine(docPath, PathTitle), FoundMatches);
+
+                return " File Printed look for Plagarism-Matches.txt on desktop";
+            }
+            catch (Exception e)
+            {
+                return " File not printed error" + e;
             }
 
         }

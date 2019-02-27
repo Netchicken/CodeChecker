@@ -35,9 +35,9 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtLevSize = new System.Windows.Forms.TextBox();
+            this.cbxContains = new System.Windows.Forms.CheckBox();
             this.btnOpenDirectory = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
-            this.cbxContains = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -47,7 +47,7 @@
             // 
             // btnPlagarism
             // 
-            this.btnPlagarism.Location = new System.Drawing.Point(3, 616);
+            this.btnPlagarism.Location = new System.Drawing.Point(3, 702);
             this.btnPlagarism.Name = "btnPlagarism";
             this.btnPlagarism.Size = new System.Drawing.Size(314, 178);
             this.btnPlagarism.TabIndex = 0;
@@ -118,9 +118,19 @@
             this.txtLevSize.TabIndex = 4;
             this.txtLevSize.Text = "300";
             // 
+            // cbxContains
+            // 
+            this.cbxContains.Location = new System.Drawing.Point(3, 190);
+            this.cbxContains.Name = "cbxContains";
+            this.cbxContains.Size = new System.Drawing.Size(293, 299);
+            this.cbxContains.TabIndex = 5;
+            this.cbxContains.Text = "Include Where one file contains another file";
+            this.cbxContains.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.cbxContains.UseVisualStyleBackColor = true;
+            // 
             // btnOpenDirectory
             // 
-            this.btnOpenDirectory.Location = new System.Drawing.Point(3, 409);
+            this.btnOpenDirectory.Location = new System.Drawing.Point(3, 495);
             this.btnOpenDirectory.Name = "btnOpenDirectory";
             this.btnOpenDirectory.Size = new System.Drawing.Size(314, 201);
             this.btnOpenDirectory.TabIndex = 2;
@@ -130,22 +140,13 @@
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(3, 800);
+            this.btnPrint.Location = new System.Drawing.Point(3, 886);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(314, 201);
             this.btnPrint.TabIndex = 1;
             this.btnPrint.Text = "Print to File";
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.BtnPrint_Click);
-            // 
-            // cbxContains
-            // 
-            this.cbxContains.Location = new System.Drawing.Point(3, 190);
-            this.cbxContains.Name = "cbxContains";
-            this.cbxContains.Size = new System.Drawing.Size(293, 213);
-            this.cbxContains.TabIndex = 5;
-            this.cbxContains.Text = "Include Where one file contains another file";
-            this.cbxContains.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

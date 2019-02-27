@@ -42,157 +42,64 @@ namespace CodeChecker
                 }
             }
         }
-        private void BtnPlagarism_Click(object sender, EventArgs e)
+        private async void BtnPlagarism_Click(object sender, EventArgs e)
         {
+
             if (ops.FoundMatches.Count > 0)
             {
                 ops.FoundMatches.Clear();
+
             }
+            ops.AllFiles.Clear();
             lbxOutput.Items.Clear();
             //   
             this.Text = ops.docPath;
             int LevSize = Convert.ToInt32(txtLevSize.Text);
             Boolean IsContains = cbxContains.Checked;
-            GetAllFiles(LevSize, IsContains);
-        }
 
-        private void GetAllFiles(int LevSize, Boolean IsContains)
-        {
+            this.Text = "Working ... be patient, its big ...or your machine is slow";
 
-            List<double> LEVDistance = new List<double>();
+            //"Similar File Matches found ... " + count + " of Total files " + AllFiles.Count + " ... now checking similarity ... " + levDist.ToString();
 
-            //files and their contents added to the dictionary
-            //  Dictionary<string, string> AllFiles = new Dictionary<string, string>();
-            //holds a record of  matches to stop them appearing twice
-            List<string> NotRepeatingMatches = new List<string>();
-            int count = 0;
 
-            var Lev = new Levenshtein();
-            try
+
+            // RunGetAllFilesAysnc(LevSize, IsContains);
+            lbxOutput.Items.Insert(0, "Searching ...");
+
+            await Task.Run(() => ops.GetAllFiles(LevSize, IsContains)).ConfigureAwait(false);
+
+            //https://stackoverflow.com/questions/142003/cross-thread-operation-not-valid-control-accessed-from-a-thread-other-than-the
+
+            //output to screen
+            Invoke(new Action(() =>
             {
-                ops.ExtractFilePaths();
-
-
-                foreach (var text in ops.AllFiles)
-                {
-                    //need this to stop it crashing
-                    System.Threading.Thread.CurrentThread.Join(10);
-
-                    //get a short path without the filename
-                    int LastSlashText1 = text.Key.Length - text.Key.LastIndexOf(@"\");
-                    string ShortText1 = text.Key.Substring(0, text.Key.Length - LastSlashText1);
-
-                    foreach (var text2 in ops.AllFiles)
-                    {
-                        //get a short path without the filename
-                        int LastSlashText2 = text2.Key.Length - text2.Key.LastIndexOf(@"\");
-                        string ShortText2 = text2.Key.Substring(0, text2.Key.Length - LastSlashText2);
-
-                        //short string to appear in file? on screen
-                        string textShort1 = text.Key.Substring(text.Key.LastIndexOf(@"\") - 25);
-
-                        //need to do contains before the rest as we stop repeats with NotRepeatingMatches
-                        Boolean TContainsT2 = false;
-                        Boolean T2ContainsT = false;
-                        if (IsContains) //do it here so it only runs when contains = true and doesn't slow down loop
-                        {
-                            TContainsT2 = text.Value.Contains(text2.Value);
-                            T2ContainsT = text2.Value.Contains(text.Value);
-                        }
-
-                        if (IsContains && (text.Key != text2.Key) && (TContainsT2 || T2ContainsT))
-                        {
-                            count++;
-
-                            //short string to appear in file? on screen
-                            string textShort2 = text2.Key.Substring(text2.Key.LastIndexOf(@"\") - 25);
-
-                            lbxOutput.Items.Add("Contains Text  -- " + textShort1 + " --  -- " + textShort2);
-
-                            ops.FoundMatches.Add("Contains Text  | " + text.Key + " -- MATCHES WITH  -- " + text2.Key + @"\n\n");
-                        }
-
-
-
-
-                        //only compare files where the path is not exactly the same so we don't have the same person. && Don't run matches that have already been done
-                        if ((text.Key != text2.Key) && !NotRepeatingMatches.Contains(text.Key + text2.Key))
-
-                        //ShortText1 != ShortText2 &&
-
-
-                        {//add the keys in reverse order so we can check them later (or earlier)
-                            NotRepeatingMatches.Add(text2.Key + text.Key);
-
-                            double levDist = Lev.Distance(text.Value, text2.Value);
-
-                            this.Text = "Similar File Matches found ... " + count + " of Total files " + ops.AllFiles.Count + " ... now checking similarity ... " + levDist.ToString();
-
-                            if (levDist < LevSize)
-                            {
-                                count++;
-
-                                //short string to appear in file? on screen
-                                string textShort2 = text2.Key.Substring(text2.Key.LastIndexOf(@"\") - 25);
-
-                                lbxOutput.Items.Add(levDist.ToString() + "  -- " + textShort1 + " --  -- " + textShort2);
-
-                                ops.FoundMatches.Add(levDist.ToString() + " | " + text.Key + " -- MATCHES WITH  -- " + text2.Key + @"\n\n");
-                            }
-
-                        }
-                    }
-                }
-                //output to screen
+                lbxOutput.Items.Clear();
                 lbxOutput.Items.Insert(0, "Search Completed!");
-                //   lbxOutput.Items.AddRange(FoundMatches.ToArray());
+                lbxOutput.Items.AddRange(ops.ScreenResults.ToArray());
+            }));
 
-            }
-            catch (UnauthorizedAccessException uAEx)
-            {
-                Console.WriteLine(uAEx.Message);
-            }
-            catch (PathTooLongException pathEx)
-            {
-                Console.WriteLine(pathEx.Message);
-            }
+
+
+
+
+
         }
 
-        public void ExtractFilePaths(Dictionary<string, string> AllFiles)
+        private async Task RunGetAllFilesAysnc(int LevSize, bool IsContains)
         {
-            var files = Directory.EnumerateFiles(ops.docPath, "*.cs", SearchOption.AllDirectories);
+            //https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.run?view=netframework-4.7.2
 
-            foreach (var f in files)
-            {
-                //filter the folders from the path
-                if (!f.Contains("Debug") && !f.Contains(".vs") && !f.Contains("packages") && !f.Contains("obj") &&
-                    !f.Contains("Properties") && !f.Contains("Resources") && !f.Contains("Program.cs"))
-                {
-                    string text = File.ReadAllText(f).ToLower();
+            await Task.Run(() => ops.GetAllFiles(LevSize, IsContains)).ConfigureAwait(false);
+            lbxOutput.Items.Insert(0, "Searching ...");
 
-                    //filter the file content
-                    if (!string.IsNullOrEmpty(text) && !text.Contains("<auto-generated>"))
-                    {
-                        AllFiles.Add(f, text);
-                    }
-                }
-            }
+            // Task.Wait();
+
         }
+
 
         private void BtnPrint_Click(object sender, EventArgs e)
         {
-
-            string PathTitle = "PlagarismMatches.txt";
-
-            string path = Directory.GetCurrentDirectory();
-            string docPath =
-                Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-            //https://docs.microsoft.com/en-us/dotnet/api/system.io.file.writealllines?view=netframework-4.7.2
-            File.WriteAllLines(Path.Combine(docPath, PathTitle), ops.FoundMatches);
-
-            MessageBox.Show("File printed to Desktop " + PathTitle);
-
+            MessageBox.Show(ops.PrintResults());
         }
 
 
