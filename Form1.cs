@@ -13,6 +13,7 @@ using F23.StringSimilarity;
 
 namespace CodeChecker
 {
+    using System.Diagnostics;
     using System.IO;
     using Standard;
 
@@ -20,16 +21,42 @@ namespace CodeChecker
     {
         Operation ops = new Operation();
 
+        //https://stackoverflow.com/questions/750574/how-to-get-memory-available-or-used-in-c-sharp/750595#750595
+        private PerformanceCounter cpuCounter;
+        private PerformanceCounter ramCounter;
 
         public Form1()
         {
             InitializeComponent();
+            InitialiseCPUCounter();
+            InitializeRAMCounter();
+            updateTimer.Start();
+            lbxOutput.Items.Add("Choose a single or multiple file type first (Bottom Left)");
+            lbxOutput.Items.Add("");
+            lbxOutput.Items.Add("If you want to check files that are in the SAME folder");
+            lbxOutput.Items.Add("Check the Same Folder checkbox - good if you just have a bunch of single files");
+            lbxOutput.Items.Add("");
+            lbxOutput.Items.Add("If you want to check if one file is contained in another file");
+            lbxOutput.Items.Add("Check the Contains Files checkbox - this might not be useful");
+            lbxOutput.Items.Add("");
+            lbxOutput.Items.Add("Then click on Find Files. - This wants to open a file (naturally enough)");
+            lbxOutput.Items.Add("But there is no such thing as a Find Folder tool and we want a FOLDER");
+            lbxOutput.Items.Add("So click on a file IN THE FOLDER THAT YOU WANT THE SEARCH TO START");
+            lbxOutput.Items.Add("If there isn't a file, just right click New => Text Document then click on that");
+            lbxOutput.Items.Add("");
+            lbxOutput.Items.Add("The indexer will search from that folder through every subfolder in the tree");
+            lbxOutput.Items.Add("");
+            lbxOutput.Items.Add("Then click Check Files to run the checker");
+            lbxOutput.Items.Add("There is a CPU meter bottom right to let you know that its still alive");
+            lbxOutput.Items.Add("");
+            lbxOutput.Items.Add("When finished you will see a truncated version on the screen - here.");
+            lbxOutput.Items.Add("Print it to see the entire path of the files in a txt file saved to the Desktop.");
+
         }
 
         private async void BtnOpenDirectory_Click(object sender, EventArgs e)
         {
             //clears out old entries
-            // ops = new Operation();
             ExtractFiles.AllFiles.Clear();
             Reset();
 
@@ -45,21 +72,28 @@ namespace CodeChecker
                 }
             }
             this.Text = ExtractFiles.docPath;
+            lbxOutput.Items.Add("Searching for File Paths ...");
             await ExtractFiles.ExtractFilePaths().ConfigureAwait(false);
 
-            this.Text = "Found " + ExtractFiles.AllFiles.Count.ToString() + " files";
-
-            if (ExtractFiles.AllFiles.Count > 0)
+            //output to screen
+            Invoke(new Action(() =>
             {
-                btnRnPlagCheck.Enabled = true;
-            }
+                this.Text = "Found " + ExtractFiles.AllFiles.Count.ToString() + " files";
+
+                if (ExtractFiles.AllFiles.Count > 0)
+                {
+                    lbxOutput.Items.Clear();
+                    btnRnPlagCheck.Enabled = true;
+                    lbxOutput.Items.Add(this.Text);
+                }
+            }));
         }
         private void Reset()
         {
             if (ops.FoundMatches.Count > 0 || lbxOutput.Items.Count > 0)
             {
                 ops.FoundMatches.Clear();
-                ExtractFiles.AllFiles.Clear();
+                //  ExtractFiles.AllFiles.Clear();
                 lbxOutput.Items.Clear();
             }
         }
@@ -78,7 +112,7 @@ namespace CodeChecker
 
 
             // RunGetAllFilesAysnc(LevSize, IsContains);
-            lbxOutput.Items.Insert(0, "Searching ...");
+            lbxOutput.Items.Insert(0, "Comparing files ...");
 
             await Task.Run(() => ops.RunLev(LevSize, IsContains)).ConfigureAwait(false);
 
@@ -113,6 +147,7 @@ namespace CodeChecker
 
         private void All_CheckedChanged(object sender, EventArgs e)
         {//generate a fake checkbox
+            Reset();
             CheckBox fakeCB = new CheckBox();
             //pass across the data from the activated checkbox
             fakeCB = (CheckBox)sender;
@@ -184,6 +219,63 @@ namespace CodeChecker
             }
 
         }
+
+        private void CbxSameFolder_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip.SetToolTip(cbxSameFolder, "Compare files in the same folder");
+        }
+
+        private void CbxContains_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip.SetToolTip(cbxContains, "Checks if one file is contained in another file - experimental");
+        }
+
+        private void TxtLevSize_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip.SetToolTip(txtLevSize, "Smaller is more similar, bigger is less." + Environment.NewLine + "Shows how many changes to make one file the same as another ");
+        }
+
+        private void BtnOpenDirectory_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip.SetToolTip(btnOpenDirectory, "Choose a file in the top level of the folders, it will check every subfolder. Needs a file to click on." + Environment.NewLine + "This also loads the files, so will need to be done when making changes to checkboxes ");
+        }
+
+        private void BtnRnPlagCheck_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip.SetToolTip(btnRnPlagCheck, "For large numbers of files leave this program open and make a coffee. " + Environment.NewLine + "It's working hard ");
+        }
+
+        private void UpdateTimer_Tick(object sender, EventArgs e)
+        {
+            lblCPU.Text = "CPU " + Convert.ToInt32(cpuCounter.NextValue()).ToString() + "%";
+
+            lblRamCounter.Text = Convert.ToInt32(ramCounter.NextValue()).ToString() + " Mb";
+        }
+
+        //https://stackoverflow.com/questions/51392374/performancecounter-cpu-memory-like-task-manager
+
+        private void InitialiseCPUCounter()
+        {
+            cpuCounter = new PerformanceCounter(
+                "Processor",
+                "% Processor Time",
+                "_Total",
+                true
+            );
+        }
+
+        private void InitializeRAMCounter()
+        {
+            ramCounter = new PerformanceCounter(
+                "Memory",
+                "Available MBytes",
+                true);
+
+        }
+
+
+
+
     }
 
 

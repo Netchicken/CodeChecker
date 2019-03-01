@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnRnPlagCheck = new System.Windows.Forms.Button();
             this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.lbxOutput = new System.Windows.Forms.ListBox();
@@ -38,12 +39,17 @@
             this.cbxCSS = new System.Windows.Forms.CheckBox();
             this.cbxCS = new System.Windows.Forms.CheckBox();
             this.cbxContains = new System.Windows.Forms.CheckBox();
+            this.cbxSameFolder = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtLevSize = new System.Windows.Forms.TextBox();
             this.btnOpenDirectory = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
-            this.cbxSameFolder = new System.Windows.Forms.CheckBox();
+            this.lblMemory = new System.Windows.Forms.Label();
+            this.lblRamCounter = new System.Windows.Forms.Label();
+            this.lblCPU = new System.Windows.Forms.Label();
+            this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.updateTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -62,6 +68,7 @@
             this.btnRnPlagCheck.Text = "Check Files";
             this.btnRnPlagCheck.UseVisualStyleBackColor = true;
             this.btnRnPlagCheck.Click += new System.EventHandler(this.BtnPlagarism_Click);
+            this.btnRnPlagCheck.MouseHover += new System.EventHandler(this.BtnRnPlagCheck_MouseHover);
             // 
             // ofd
             // 
@@ -165,6 +172,19 @@
             this.cbxContains.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.cbxContains.UseVisualStyleBackColor = true;
             this.cbxContains.CheckedChanged += new System.EventHandler(this.All_CheckedChanged);
+            this.cbxContains.MouseHover += new System.EventHandler(this.CbxContains_MouseHover);
+            // 
+            // cbxSameFolder
+            // 
+            this.cbxSameFolder.AutoSize = true;
+            this.cbxSameFolder.Location = new System.Drawing.Point(956, 3);
+            this.cbxSameFolder.Name = "cbxSameFolder";
+            this.cbxSameFolder.Size = new System.Drawing.Size(284, 48);
+            this.cbxSameFolder.TabIndex = 6;
+            this.cbxSameFolder.Text = "Same Folder";
+            this.cbxSameFolder.UseVisualStyleBackColor = true;
+            this.cbxSameFolder.CheckedChanged += new System.EventHandler(this.All_CheckedChanged);
+            this.cbxSameFolder.MouseHover += new System.EventHandler(this.CbxSameFolder_MouseHover);
             // 
             // flowLayoutPanel1
             // 
@@ -173,6 +193,9 @@
             this.flowLayoutPanel1.Controls.Add(this.btnOpenDirectory);
             this.flowLayoutPanel1.Controls.Add(this.btnRnPlagCheck);
             this.flowLayoutPanel1.Controls.Add(this.btnPrint);
+            this.flowLayoutPanel1.Controls.Add(this.lblMemory);
+            this.flowLayoutPanel1.Controls.Add(this.lblRamCounter);
+            this.flowLayoutPanel1.Controls.Add(this.lblCPU);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -195,6 +218,7 @@
             this.txtLevSize.Size = new System.Drawing.Size(348, 49);
             this.txtLevSize.TabIndex = 4;
             this.txtLevSize.Text = "300";
+            this.txtLevSize.MouseHover += new System.EventHandler(this.TxtLevSize_MouseHover);
             // 
             // btnOpenDirectory
             // 
@@ -203,9 +227,10 @@
             this.btnOpenDirectory.Name = "btnOpenDirectory";
             this.btnOpenDirectory.Size = new System.Drawing.Size(314, 201);
             this.btnOpenDirectory.TabIndex = 2;
-            this.btnOpenDirectory.Text = "Open Folder";
+            this.btnOpenDirectory.Text = "Find Files";
             this.btnOpenDirectory.UseVisualStyleBackColor = true;
             this.btnOpenDirectory.Click += new System.EventHandler(this.BtnOpenDirectory_Click);
+            this.btnOpenDirectory.MouseHover += new System.EventHandler(this.BtnOpenDirectory_MouseHover);
             // 
             // btnPrint
             // 
@@ -217,16 +242,52 @@
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.BtnPrint_Click);
             // 
-            // cbxSameFolder
+            // lblMemory
             // 
-            this.cbxSameFolder.AutoSize = true;
-            this.cbxSameFolder.Location = new System.Drawing.Point(956, 3);
-            this.cbxSameFolder.Name = "cbxSameFolder";
-            this.cbxSameFolder.Size = new System.Drawing.Size(284, 48);
-            this.cbxSameFolder.TabIndex = 6;
-            this.cbxSameFolder.Text = "Same Folder";
-            this.cbxSameFolder.UseVisualStyleBackColor = true;
-            this.cbxSameFolder.CheckedChanged += new System.EventHandler(this.All_CheckedChanged);
+            this.lblMemory.AutoSize = true;
+            this.lblMemory.Location = new System.Drawing.Point(3, 785);
+            this.lblMemory.Name = "lblMemory";
+            this.lblMemory.Size = new System.Drawing.Size(0, 44);
+            this.lblMemory.TabIndex = 7;
+            // 
+            // lblRamCounter
+            // 
+            this.lblRamCounter.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblRamCounter.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRamCounter.ForeColor = System.Drawing.Color.DarkOliveGreen;
+            this.lblRamCounter.Location = new System.Drawing.Point(3, 829);
+            this.lblRamCounter.Name = "lblRamCounter";
+            this.lblRamCounter.Size = new System.Drawing.Size(308, 58);
+            this.lblRamCounter.TabIndex = 8;
+            this.lblRamCounter.Text = "Ram";
+            this.lblRamCounter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblCPU
+            // 
+            this.lblCPU.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblCPU.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCPU.ForeColor = System.Drawing.Color.DarkOliveGreen;
+            this.lblCPU.Location = new System.Drawing.Point(3, 887);
+            this.lblCPU.Name = "lblCPU";
+            this.lblCPU.Size = new System.Drawing.Size(314, 58);
+            this.lblCPU.TabIndex = 9;
+            this.lblCPU.Text = "CPU";
+            this.lblCPU.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // ToolTip
+            // 
+            this.ToolTip.AutomaticDelay = 200;
+            this.ToolTip.AutoPopDelay = 10000;
+            this.ToolTip.InitialDelay = 200;
+            this.ToolTip.IsBalloon = true;
+            this.ToolTip.ReshowDelay = 40;
+            this.ToolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.ToolTip.ToolTipTitle = "Information";
+            // 
+            // updateTimer
+            // 
+            this.updateTimer.Interval = 1000;
+            this.updateTimer.Tick += new System.EventHandler(this.UpdateTimer_Tick);
             // 
             // Form1
             // 
@@ -266,6 +327,11 @@
         private System.Windows.Forms.CheckBox cbxCSS;
         private System.Windows.Forms.CheckBox cbxCS;
         private System.Windows.Forms.CheckBox cbxSameFolder;
+        private System.Windows.Forms.ToolTip ToolTip;
+        private System.Windows.Forms.Label lblMemory;
+        private System.Windows.Forms.Timer updateTimer;
+        private System.Windows.Forms.Label lblRamCounter;
+        private System.Windows.Forms.Label lblCPU;
     }
 }
 
