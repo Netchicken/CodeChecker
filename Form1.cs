@@ -223,6 +223,7 @@ namespace CodeChecker
         private void CbxSameFolder_MouseHover(object sender, EventArgs e)
         {
             ToolTip.SetToolTip(cbxSameFolder, "Compare files in the same folder");
+
         }
 
         private void CbxContains_MouseHover(object sender, EventArgs e)

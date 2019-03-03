@@ -20,12 +20,19 @@ namespace CodeChecker
 
         public static string docPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
+        //todo Make allfiles local return out Ienum and work out how to have it as a task
+
         //files and their contents added to the dictionary
         public static Dictionary<string, string> AllFiles = new Dictionary<string, string>();
 
+        //.ConfigureAwait(false) prevents deadlocks in your calls;
 
         public static async Task ExtractFilePaths()
-        { //files and their contents added to the dictionary
+        {
+            Dictionary<string, string> AllLocalFiles = new Dictionary<string, string>();
+            //https://stackoverflow.com/questions/33234614/how-to-return-a-result-from-an-async-task
+
+            //files and their contents added to the dictionary
             if (isHTML)
             {
                 //ExtractHTML();
@@ -34,7 +41,7 @@ namespace CodeChecker
             if (isCSharp)
             {
                 // ExtractCSharp();
-                await Task.Run(() => ExtractCSharp()).ConfigureAwait(false);
+                AllLocalFiles = (Dictionary<string, string>)await Task.Run(() => ExtractCSharp(AllFiles)).ConfigureAwait(false);
             }
             if (isJS)
             {
@@ -47,11 +54,12 @@ namespace CodeChecker
                 await Task.Run(() => ExtractCSS()).ConfigureAwait(false);
             }
 
+            AllFiles = AllLocalFiles;
         }
         /// <summary>
         /// Not merging these files in case I have to modify the filter parameters
         /// </summary>
-        private static void ExtractCSharp()
+        private static Dictionary<string, string> ExtractCSharp(Dictionary<string, string> AllFiles)
         {
             var files = Directory.EnumerateFiles(docPath, "*.cs", SearchOption.AllDirectories);
 
@@ -71,7 +79,7 @@ namespace CodeChecker
                     }
                 }
             }
-
+            return AllFiles;
         }
 
         private static void ExtractHTML()
