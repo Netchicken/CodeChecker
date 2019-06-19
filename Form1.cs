@@ -39,8 +39,8 @@ namespace CodeChecker
             lbxOutput.Items.Add("If you want to check if one file is contained in another file");
             lbxOutput.Items.Add("Check the Contains Files checkbox - this might not be useful");
             lbxOutput.Items.Add("");
-            lbxOutput.Items.Add("Then click on Find Files. - This wants to open a file (naturally enough)");
-            lbxOutput.Items.Add("But there is no such thing as a Find Folder tool and we want a FOLDER");
+            lbxOutput.Items.Add("Then click on Find Files. - This wants to open a file (naturally enough) and we want a Folder");
+            lbxOutput.Items.Add("But there is no such thing as a Find Folder tool");
             lbxOutput.Items.Add("So click on a file IN THE FOLDER THAT YOU WANT THE SEARCH TO START");
             lbxOutput.Items.Add("If there isn't a file, just right click New => Text Document then click on that");
             lbxOutput.Items.Add("");
@@ -78,13 +78,23 @@ namespace CodeChecker
             //output to screen
             Invoke(new Action(() =>
             {
-                this.Text = "Found " + ExtractFiles.AllFiles.Count.ToString() + " files";
+                this.Text = "Found " + ExtractFiles.AllFiles.Count.ToString() + " files at " + ExtractFiles.docPath;
 
                 if (ExtractFiles.AllFiles.Count > 0)
                 {
                     lbxOutput.Items.Clear();
                     btnRnPlagCheck.Enabled = true;
-                    lbxOutput.Items.Add(this.Text);
+                    lbxOutput.Items.Add(this.Text + " Now press Check Files");
+
+
+                    foreach (var file in ExtractFiles.AllFiles)
+                    {
+                        lbxOutput.Items.Add(file.Key.ToString());
+                    }
+
+
+
+
                 }
             }));
         }
@@ -92,6 +102,7 @@ namespace CodeChecker
         {
             if (ops.FoundMatches.Count > 0 || lbxOutput.Items.Count > 0)
             {
+                ops.ScreenResults.Clear();
                 ops.FoundMatches.Clear();
                 //  ExtractFiles.AllFiles.Clear();
                 lbxOutput.Items.Clear();
@@ -123,7 +134,27 @@ namespace CodeChecker
             {
                 lbxOutput.Items.Clear();
                 lbxOutput.Items.Insert(0, "Search Completed!");
-                lbxOutput.Items.AddRange(ops.ScreenResults.ToArray());
+
+
+                if (ops.ScreenResults.Count == 0)
+                {
+                    lbxOutput.Items.Add("No results");
+
+                }
+
+                if (ExtractFiles.isSameFolder == false)
+                {
+                    lbxOutput.Items.Add("Try checking the Same Folder TickBox and run Check Files again");
+                }
+
+
+                foreach (var output in ops.ScreenResults)
+                {
+                    lbxOutput.Items.Add(output.ToString());
+                }
+
+                this.Text += "File Path is " + ExtractFiles.docPath;
+                //   lbxOutput.Items.AddRange(ops.ScreenResults.ToArray());
             }));
         }
 

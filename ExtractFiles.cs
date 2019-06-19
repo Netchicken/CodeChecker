@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Windows.Forms;
 
 namespace CodeChecker
 {
-    using System.IO;
-    using System.Windows.Forms;
 
     public static class ExtractFiles
     {
@@ -41,7 +41,8 @@ namespace CodeChecker
             if (isCSharp)
             {
                 // ExtractCSharp();
-                AllLocalFiles = (Dictionary<string, string>)await Task.Run(() => ExtractCSharp(AllFiles)).ConfigureAwait(false);
+                //  AllLocalFiles = (Dictionary<string, string>)await Task.Run(() => ExtractCSharp(AllFiles)).ConfigureAwait(false);
+                await Task.Run(() => ExtractCSharp()).ConfigureAwait(false);
             }
             if (isJS)
             {
@@ -54,12 +55,12 @@ namespace CodeChecker
                 await Task.Run(() => ExtractCSS()).ConfigureAwait(false);
             }
 
-            AllFiles = AllLocalFiles;
+            //     AllFiles = AllLocalFiles;
         }
         /// <summary>
         /// Not merging these files in case I have to modify the filter parameters
-        /// </summary>
-        private static Dictionary<string, string> ExtractCSharp(Dictionary<string, string> AllFiles)
+        /// </summary>Dictionary<string, string> AllFiles
+        private static void ExtractCSharp()
         {
             var files = Directory.EnumerateFiles(docPath, "*.cs", SearchOption.AllDirectories);
 
@@ -79,7 +80,7 @@ namespace CodeChecker
                     }
                 }
             }
-            return AllFiles;
+            // return AllFiles;
         }
 
         private static void ExtractHTML()

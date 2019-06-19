@@ -12,6 +12,8 @@ namespace CodeChecker
 
     public class Operation
     {
+        public string ShowTestingPaths { get; set; }
+
         public string Text { get; set; }
         public string Text2 { get; set; }
         //files and their contents added to the dictionary
@@ -45,6 +47,8 @@ namespace CodeChecker
                         {
                             //need this to stop it crashing
                             System.Threading.Thread.CurrentThread.Join(10);
+
+                            //    ShowTestingPaths = text1 + " " + text2;
 
                             //get shorttext to stop files in same path being checked 
                             string FolderPathNoFile2 = GetShortPath(text2.Key);
@@ -135,7 +139,7 @@ namespace CodeChecker
         /// </summary>
         private string GetShortPathWithFileName(string text)
         {
-            return text.Substring(text.LastIndexOf(@"\") - 25);
+            return text.Substring(text.LastIndexOf(@"\")); //- 25
         }
         private string GetFileType(string text)
         {
