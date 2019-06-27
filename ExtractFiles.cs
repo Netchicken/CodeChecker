@@ -35,27 +35,21 @@ namespace CodeChecker
             //files and their contents added to the dictionary
             if (isHTML)
             {
-                //ExtractHTML();
                 await Task.Run(() => ExtractHTML()).ConfigureAwait(false);
             }
             if (isCSharp)
             {
-                // ExtractCSharp();
-                //  AllLocalFiles = (Dictionary<string, string>)await Task.Run(() => ExtractCSharp(AllFiles)).ConfigureAwait(false);
                 await Task.Run(() => ExtractCSharp()).ConfigureAwait(false);
             }
             if (isJS)
             {
-                // ExtractJS();
                 await Task.Run(() => ExtractJS()).ConfigureAwait(false);
             }
             if (isCSS)
             {
-                //   ExtractCSS();
                 await Task.Run(() => ExtractCSS()).ConfigureAwait(false);
             }
 
-            //     AllFiles = AllLocalFiles;
         }
         /// <summary>
         /// Not merging these files in case I have to modify the filter parameters

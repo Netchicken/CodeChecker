@@ -62,7 +62,7 @@
             // 
             this.btnRnPlagCheck.Enabled = false;
             this.btnRnPlagCheck.Location = new System.Drawing.Point(1, 155);
-            this.btnRnPlagCheck.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.btnRnPlagCheck.Margin = new System.Windows.Forms.Padding(1);
             this.btnRnPlagCheck.Name = "btnRnPlagCheck";
             this.btnRnPlagCheck.Size = new System.Drawing.Size(114, 68);
             this.btnRnPlagCheck.TabIndex = 0;
@@ -83,16 +83,16 @@
             this.lbxOutput.HorizontalScrollbar = true;
             this.lbxOutput.ItemHeight = 20;
             this.lbxOutput.Location = new System.Drawing.Point(0, 0);
-            this.lbxOutput.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.lbxOutput.Margin = new System.Windows.Forms.Padding(1);
             this.lbxOutput.Name = "lbxOutput";
-            this.lbxOutput.Size = new System.Drawing.Size(848, 446);
+            this.lbxOutput.Size = new System.Drawing.Size(847, 446);
             this.lbxOutput.TabIndex = 1;
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(1);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -104,7 +104,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.flowLayoutPanel1);
             this.splitContainer1.Size = new System.Drawing.Size(962, 446);
-            this.splitContainer1.SplitterDistance = 848;
+            this.splitContainer1.SplitterDistance = 847;
             this.splitContainer1.SplitterWidth = 1;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -118,16 +118,16 @@
             this.flowLayoutPanel2.Controls.Add(this.cbxSameFolder);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 408);
-            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(1);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(848, 38);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(847, 38);
             this.flowLayoutPanel2.TabIndex = 2;
             // 
             // cbxHTML
             // 
             this.cbxHTML.AutoSize = true;
             this.cbxHTML.Location = new System.Drawing.Point(1, 1);
-            this.cbxHTML.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.cbxHTML.Margin = new System.Windows.Forms.Padding(1);
             this.cbxHTML.Name = "cbxHTML";
             this.cbxHTML.Size = new System.Drawing.Size(68, 21);
             this.cbxHTML.TabIndex = 0;
@@ -139,7 +139,7 @@
             // 
             this.cbxJS.AutoSize = true;
             this.cbxJS.Location = new System.Drawing.Point(71, 1);
-            this.cbxJS.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.cbxJS.Margin = new System.Windows.Forms.Padding(1);
             this.cbxJS.Name = "cbxJS";
             this.cbxJS.Size = new System.Drawing.Size(46, 21);
             this.cbxJS.TabIndex = 1;
@@ -151,7 +151,7 @@
             // 
             this.cbxCSS.AutoSize = true;
             this.cbxCSS.Location = new System.Drawing.Point(119, 1);
-            this.cbxCSS.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.cbxCSS.Margin = new System.Windows.Forms.Padding(1);
             this.cbxCSS.Name = "cbxCSS";
             this.cbxCSS.Size = new System.Drawing.Size(57, 21);
             this.cbxCSS.TabIndex = 2;
@@ -163,7 +163,7 @@
             // 
             this.cbxCS.AutoSize = true;
             this.cbxCS.Location = new System.Drawing.Point(178, 1);
-            this.cbxCS.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.cbxCS.Margin = new System.Windows.Forms.Padding(1);
             this.cbxCS.Name = "cbxCS";
             this.cbxCS.Size = new System.Drawing.Size(77, 21);
             this.cbxCS.TabIndex = 3;
@@ -175,7 +175,7 @@
             // 
             this.cbxContains.AutoSize = true;
             this.cbxContains.Location = new System.Drawing.Point(257, 1);
-            this.cbxContains.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.cbxContains.Margin = new System.Windows.Forms.Padding(1);
             this.cbxContains.Name = "cbxContains";
             this.cbxContains.Size = new System.Drawing.Size(118, 21);
             this.cbxContains.TabIndex = 5;
@@ -189,7 +189,7 @@
             // 
             this.cbxSameFolder.AutoSize = true;
             this.cbxSameFolder.Location = new System.Drawing.Point(377, 1);
-            this.cbxSameFolder.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.cbxSameFolder.Margin = new System.Windows.Forms.Padding(1);
             this.cbxSameFolder.Name = "cbxSameFolder";
             this.cbxSameFolder.Size = new System.Drawing.Size(110, 21);
             this.cbxSameFolder.TabIndex = 6;
@@ -210,9 +210,9 @@
             this.flowLayoutPanel1.Controls.Add(this.lblCPU);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(1);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(113, 446);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(114, 446);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // label1
@@ -228,7 +228,7 @@
             // txtLevSize
             // 
             this.txtLevSize.Location = new System.Drawing.Point(1, 52);
-            this.txtLevSize.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.txtLevSize.Margin = new System.Windows.Forms.Padding(1);
             this.txtLevSize.Name = "txtLevSize";
             this.txtLevSize.Size = new System.Drawing.Size(129, 22);
             this.txtLevSize.TabIndex = 4;
@@ -239,7 +239,7 @@
             // 
             this.btnOpenDirectory.Enabled = false;
             this.btnOpenDirectory.Location = new System.Drawing.Point(1, 76);
-            this.btnOpenDirectory.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.btnOpenDirectory.Margin = new System.Windows.Forms.Padding(1);
             this.btnOpenDirectory.Name = "btnOpenDirectory";
             this.btnOpenDirectory.Size = new System.Drawing.Size(114, 77);
             this.btnOpenDirectory.TabIndex = 2;
@@ -251,7 +251,7 @@
             // btnPrint
             // 
             this.btnPrint.Location = new System.Drawing.Point(1, 225);
-            this.btnPrint.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.btnPrint.Margin = new System.Windows.Forms.Padding(1);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(114, 77);
             this.btnPrint.TabIndex = 1;
@@ -313,10 +313,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.PaleGreen;
+            this.BackColor = System.Drawing.Color.LightBlue;
             this.ClientSize = new System.Drawing.Size(962, 446);
             this.Controls.Add(this.splitContainer1);
-            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "Form1";
             this.Text = "Garys Awesome Plagarism Checker";
             this.splitContainer1.Panel1.ResumeLayout(false);

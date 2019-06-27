@@ -117,7 +117,7 @@ namespace CodeChecker
             {
                 count++;
 
-                ScreenResults.Add("Contains Text  -- " + GetShortPathWithFileName(text1.Key) + " --  -- " + GetShortPathWithFileName(text2.Key));
+                // ScreenResults.Add("Contains Text  -- " + GetShortPathWithFileName(text1.Key) + " --  -- " + GetShortPathWithFileName(text2.Key));
 
                 FoundMatches.Add("Contains Text  | " + text1.Key + " -- MATCHES WITH  -- " + text2.Key + @"\n\n");
             }
