@@ -110,7 +110,7 @@ namespace CodeChecker
 
             //https://stackoverflow.com/questions/142003/cross-thread-operation-not-valid-control-accessed-from-a-thread-other-than-the
 
-            //output to screen
+            //output to screen when the task has finished
             Invoke(new Action(() =>
             {
                 lbxOutput.Items.Clear();
@@ -135,7 +135,7 @@ namespace CodeChecker
                 }
 
                 this.Text += "File Path is " + ExtractFiles.docPath;
-              
+
             }));
         }
 

@@ -40,6 +40,7 @@
             this.cbxCS = new System.Windows.Forms.CheckBox();
             this.cbxContains = new System.Windows.Forms.CheckBox();
             this.cbxSameFolder = new System.Windows.Forms.CheckBox();
+            this.cbxGuid = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtLevSize = new System.Windows.Forms.TextBox();
@@ -50,7 +51,6 @@
             this.lblCPU = new System.Windows.Forms.Label();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
-            this.cbxGuid = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -62,7 +62,7 @@
             // btnRnPlagCheck
             // 
             this.btnRnPlagCheck.Enabled = false;
-            this.btnRnPlagCheck.Location = new System.Drawing.Point(1, 127);
+            this.btnRnPlagCheck.Location = new System.Drawing.Point(1, 114);
             this.btnRnPlagCheck.Margin = new System.Windows.Forms.Padding(1);
             this.btnRnPlagCheck.Name = "btnRnPlagCheck";
             this.btnRnPlagCheck.Size = new System.Drawing.Size(86, 55);
@@ -86,7 +86,7 @@
             this.lbxOutput.Location = new System.Drawing.Point(0, 0);
             this.lbxOutput.Margin = new System.Windows.Forms.Padding(1);
             this.lbxOutput.Name = "lbxOutput";
-            this.lbxOutput.Size = new System.Drawing.Size(635, 362);
+            this.lbxOutput.Size = new System.Drawing.Size(923, 362);
             this.lbxOutput.TabIndex = 1;
             // 
             // splitContainer1
@@ -104,8 +104,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.flowLayoutPanel1);
-            this.splitContainer1.Size = new System.Drawing.Size(722, 362);
-            this.splitContainer1.SplitterDistance = 635;
+            this.splitContainer1.Size = new System.Drawing.Size(1050, 362);
+            this.splitContainer1.SplitterDistance = 923;
             this.splitContainer1.SplitterWidth = 1;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -122,7 +122,7 @@
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 331);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(1);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(635, 31);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(923, 31);
             this.flowLayoutPanel2.TabIndex = 2;
             // 
             // cbxHTML
@@ -200,6 +200,19 @@
             this.cbxSameFolder.CheckedChanged += new System.EventHandler(this.All_CheckedChanged);
             this.cbxSameFolder.MouseHover += new System.EventHandler(this.CbxSameFolder_MouseHover);
             // 
+            // cbxGuid
+            // 
+            this.cbxGuid.AutoSize = true;
+            this.cbxGuid.Location = new System.Drawing.Point(391, 1);
+            this.cbxGuid.Margin = new System.Windows.Forms.Padding(1);
+            this.cbxGuid.Name = "cbxGuid";
+            this.cbxGuid.Size = new System.Drawing.Size(121, 17);
+            this.cbxGuid.TabIndex = 7;
+            this.cbxGuid.Text = "ProjectGuid Number";
+            this.cbxGuid.UseVisualStyleBackColor = true;
+            this.cbxGuid.CheckedChanged += new System.EventHandler(this.All_CheckedChanged);
+            this.cbxGuid.MouseHover += new System.EventHandler(this.CbxGuid_MouseHover);
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.label1);
@@ -214,7 +227,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(1);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(86, 362);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(126, 362);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // label1
@@ -223,13 +236,13 @@
             this.label1.Location = new System.Drawing.Point(1, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 39);
+            this.label1.Size = new System.Drawing.Size(102, 26);
             this.label1.TabIndex = 3;
             this.label1.Text = "Set match number - smaller is closer";
             // 
             // txtLevSize
             // 
-            this.txtLevSize.Location = new System.Drawing.Point(1, 40);
+            this.txtLevSize.Location = new System.Drawing.Point(1, 27);
             this.txtLevSize.Margin = new System.Windows.Forms.Padding(1);
             this.txtLevSize.Name = "txtLevSize";
             this.txtLevSize.Size = new System.Drawing.Size(98, 20);
@@ -240,7 +253,7 @@
             // btnOpenDirectory
             // 
             this.btnOpenDirectory.Enabled = false;
-            this.btnOpenDirectory.Location = new System.Drawing.Point(1, 62);
+            this.btnOpenDirectory.Location = new System.Drawing.Point(1, 49);
             this.btnOpenDirectory.Margin = new System.Windows.Forms.Padding(1);
             this.btnOpenDirectory.Name = "btnOpenDirectory";
             this.btnOpenDirectory.Size = new System.Drawing.Size(86, 63);
@@ -252,7 +265,7 @@
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(1, 184);
+            this.btnPrint.Location = new System.Drawing.Point(1, 171);
             this.btnPrint.Margin = new System.Windows.Forms.Padding(1);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(86, 63);
@@ -264,7 +277,7 @@
             // lblMemory
             // 
             this.lblMemory.AutoSize = true;
-            this.lblMemory.Location = new System.Drawing.Point(1, 248);
+            this.lblMemory.Location = new System.Drawing.Point(89, 170);
             this.lblMemory.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblMemory.Name = "lblMemory";
             this.lblMemory.Size = new System.Drawing.Size(0, 13);
@@ -275,7 +288,7 @@
             this.lblRamCounter.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblRamCounter.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRamCounter.ForeColor = System.Drawing.Color.DarkOliveGreen;
-            this.lblRamCounter.Location = new System.Drawing.Point(1, 261);
+            this.lblRamCounter.Location = new System.Drawing.Point(1, 235);
             this.lblRamCounter.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblRamCounter.Name = "lblRamCounter";
             this.lblRamCounter.Size = new System.Drawing.Size(84, 18);
@@ -288,7 +301,7 @@
             this.lblCPU.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblCPU.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCPU.ForeColor = System.Drawing.Color.DarkOliveGreen;
-            this.lblCPU.Location = new System.Drawing.Point(1, 279);
+            this.lblCPU.Location = new System.Drawing.Point(1, 253);
             this.lblCPU.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblCPU.Name = "lblCPU";
             this.lblCPU.Size = new System.Drawing.Size(86, 18);
@@ -311,25 +324,12 @@
             this.updateTimer.Interval = 1000;
             this.updateTimer.Tick += new System.EventHandler(this.UpdateTimer_Tick);
             // 
-            // cbxGuid
-            // 
-            this.cbxGuid.AutoSize = true;
-            this.cbxGuid.Location = new System.Drawing.Point(391, 1);
-            this.cbxGuid.Margin = new System.Windows.Forms.Padding(1);
-            this.cbxGuid.Name = "cbxGuid";
-            this.cbxGuid.Size = new System.Drawing.Size(121, 17);
-            this.cbxGuid.TabIndex = 7;
-            this.cbxGuid.Text = "ProjectGuid Number";
-            this.cbxGuid.UseVisualStyleBackColor = true;
-            this.cbxGuid.CheckedChanged += new System.EventHandler(this.All_CheckedChanged);
-            this.cbxGuid.MouseHover += new System.EventHandler(this.CbxGuid_MouseHover);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightBlue;
-            this.ClientSize = new System.Drawing.Size(722, 362);
+            this.ClientSize = new System.Drawing.Size(1050, 362);
             this.Controls.Add(this.splitContainer1);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "Form1";
