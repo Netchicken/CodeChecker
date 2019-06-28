@@ -50,6 +50,7 @@
             this.lblCPU = new System.Windows.Forms.Label();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.updateTimer = new System.Windows.Forms.Timer(this.components);
+            this.cbxGuid = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -61,10 +62,10 @@
             // btnRnPlagCheck
             // 
             this.btnRnPlagCheck.Enabled = false;
-            this.btnRnPlagCheck.Location = new System.Drawing.Point(1, 155);
+            this.btnRnPlagCheck.Location = new System.Drawing.Point(1, 127);
             this.btnRnPlagCheck.Margin = new System.Windows.Forms.Padding(1);
             this.btnRnPlagCheck.Name = "btnRnPlagCheck";
-            this.btnRnPlagCheck.Size = new System.Drawing.Size(114, 68);
+            this.btnRnPlagCheck.Size = new System.Drawing.Size(86, 55);
             this.btnRnPlagCheck.TabIndex = 0;
             this.btnRnPlagCheck.Text = "Check Files";
             this.btnRnPlagCheck.UseVisualStyleBackColor = true;
@@ -81,11 +82,11 @@
             this.lbxOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbxOutput.FormattingEnabled = true;
             this.lbxOutput.HorizontalScrollbar = true;
-            this.lbxOutput.ItemHeight = 20;
+            this.lbxOutput.ItemHeight = 16;
             this.lbxOutput.Location = new System.Drawing.Point(0, 0);
             this.lbxOutput.Margin = new System.Windows.Forms.Padding(1);
             this.lbxOutput.Name = "lbxOutput";
-            this.lbxOutput.Size = new System.Drawing.Size(847, 446);
+            this.lbxOutput.Size = new System.Drawing.Size(635, 362);
             this.lbxOutput.TabIndex = 1;
             // 
             // splitContainer1
@@ -103,8 +104,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.flowLayoutPanel1);
-            this.splitContainer1.Size = new System.Drawing.Size(962, 446);
-            this.splitContainer1.SplitterDistance = 847;
+            this.splitContainer1.Size = new System.Drawing.Size(722, 362);
+            this.splitContainer1.SplitterDistance = 635;
             this.splitContainer1.SplitterWidth = 1;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -116,11 +117,12 @@
             this.flowLayoutPanel2.Controls.Add(this.cbxCS);
             this.flowLayoutPanel2.Controls.Add(this.cbxContains);
             this.flowLayoutPanel2.Controls.Add(this.cbxSameFolder);
+            this.flowLayoutPanel2.Controls.Add(this.cbxGuid);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 408);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 331);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(1);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(847, 38);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(635, 31);
             this.flowLayoutPanel2.TabIndex = 2;
             // 
             // cbxHTML
@@ -129,7 +131,7 @@
             this.cbxHTML.Location = new System.Drawing.Point(1, 1);
             this.cbxHTML.Margin = new System.Windows.Forms.Padding(1);
             this.cbxHTML.Name = "cbxHTML";
-            this.cbxHTML.Size = new System.Drawing.Size(68, 21);
+            this.cbxHTML.Size = new System.Drawing.Size(56, 17);
             this.cbxHTML.TabIndex = 0;
             this.cbxHTML.Text = "HTML";
             this.cbxHTML.UseVisualStyleBackColor = true;
@@ -138,10 +140,10 @@
             // cbxJS
             // 
             this.cbxJS.AutoSize = true;
-            this.cbxJS.Location = new System.Drawing.Point(71, 1);
+            this.cbxJS.Location = new System.Drawing.Point(59, 1);
             this.cbxJS.Margin = new System.Windows.Forms.Padding(1);
             this.cbxJS.Name = "cbxJS";
-            this.cbxJS.Size = new System.Drawing.Size(46, 21);
+            this.cbxJS.Size = new System.Drawing.Size(38, 17);
             this.cbxJS.TabIndex = 1;
             this.cbxJS.Text = "JS";
             this.cbxJS.UseVisualStyleBackColor = true;
@@ -150,10 +152,10 @@
             // cbxCSS
             // 
             this.cbxCSS.AutoSize = true;
-            this.cbxCSS.Location = new System.Drawing.Point(119, 1);
+            this.cbxCSS.Location = new System.Drawing.Point(99, 1);
             this.cbxCSS.Margin = new System.Windows.Forms.Padding(1);
             this.cbxCSS.Name = "cbxCSS";
-            this.cbxCSS.Size = new System.Drawing.Size(57, 21);
+            this.cbxCSS.Size = new System.Drawing.Size(47, 17);
             this.cbxCSS.TabIndex = 2;
             this.cbxCSS.Text = "CSS";
             this.cbxCSS.UseVisualStyleBackColor = true;
@@ -162,10 +164,10 @@
             // cbxCS
             // 
             this.cbxCS.AutoSize = true;
-            this.cbxCS.Location = new System.Drawing.Point(178, 1);
+            this.cbxCS.Location = new System.Drawing.Point(148, 1);
             this.cbxCS.Margin = new System.Windows.Forms.Padding(1);
             this.cbxCS.Name = "cbxCS";
-            this.cbxCS.Size = new System.Drawing.Size(77, 21);
+            this.cbxCS.Size = new System.Drawing.Size(61, 17);
             this.cbxCS.TabIndex = 3;
             this.cbxCS.Text = "CSharp";
             this.cbxCS.UseVisualStyleBackColor = true;
@@ -174,10 +176,10 @@
             // cbxContains
             // 
             this.cbxContains.AutoSize = true;
-            this.cbxContains.Location = new System.Drawing.Point(257, 1);
+            this.cbxContains.Location = new System.Drawing.Point(211, 1);
             this.cbxContains.Margin = new System.Windows.Forms.Padding(1);
             this.cbxContains.Name = "cbxContains";
-            this.cbxContains.Size = new System.Drawing.Size(118, 21);
+            this.cbxContains.Size = new System.Drawing.Size(91, 17);
             this.cbxContains.TabIndex = 5;
             this.cbxContains.Text = "Contains Files";
             this.cbxContains.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -188,10 +190,10 @@
             // cbxSameFolder
             // 
             this.cbxSameFolder.AutoSize = true;
-            this.cbxSameFolder.Location = new System.Drawing.Point(377, 1);
+            this.cbxSameFolder.Location = new System.Drawing.Point(304, 1);
             this.cbxSameFolder.Margin = new System.Windows.Forms.Padding(1);
             this.cbxSameFolder.Name = "cbxSameFolder";
-            this.cbxSameFolder.Size = new System.Drawing.Size(110, 21);
+            this.cbxSameFolder.Size = new System.Drawing.Size(85, 17);
             this.cbxSameFolder.TabIndex = 6;
             this.cbxSameFolder.Text = "Same Folder";
             this.cbxSameFolder.UseVisualStyleBackColor = true;
@@ -212,7 +214,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(1);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(114, 446);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(86, 362);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // label1
@@ -221,16 +223,16 @@
             this.label1.Location = new System.Drawing.Point(1, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 51);
+            this.label1.Size = new System.Drawing.Size(83, 39);
             this.label1.TabIndex = 3;
             this.label1.Text = "Set match number - smaller is closer";
             // 
             // txtLevSize
             // 
-            this.txtLevSize.Location = new System.Drawing.Point(1, 52);
+            this.txtLevSize.Location = new System.Drawing.Point(1, 40);
             this.txtLevSize.Margin = new System.Windows.Forms.Padding(1);
             this.txtLevSize.Name = "txtLevSize";
-            this.txtLevSize.Size = new System.Drawing.Size(129, 22);
+            this.txtLevSize.Size = new System.Drawing.Size(98, 20);
             this.txtLevSize.TabIndex = 4;
             this.txtLevSize.Text = "300";
             this.txtLevSize.MouseHover += new System.EventHandler(this.TxtLevSize_MouseHover);
@@ -238,10 +240,10 @@
             // btnOpenDirectory
             // 
             this.btnOpenDirectory.Enabled = false;
-            this.btnOpenDirectory.Location = new System.Drawing.Point(1, 76);
+            this.btnOpenDirectory.Location = new System.Drawing.Point(1, 62);
             this.btnOpenDirectory.Margin = new System.Windows.Forms.Padding(1);
             this.btnOpenDirectory.Name = "btnOpenDirectory";
-            this.btnOpenDirectory.Size = new System.Drawing.Size(114, 77);
+            this.btnOpenDirectory.Size = new System.Drawing.Size(86, 63);
             this.btnOpenDirectory.TabIndex = 2;
             this.btnOpenDirectory.Text = "Find Files";
             this.btnOpenDirectory.UseVisualStyleBackColor = true;
@@ -250,10 +252,10 @@
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(1, 225);
+            this.btnPrint.Location = new System.Drawing.Point(1, 184);
             this.btnPrint.Margin = new System.Windows.Forms.Padding(1);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(114, 77);
+            this.btnPrint.Size = new System.Drawing.Size(86, 63);
             this.btnPrint.TabIndex = 1;
             this.btnPrint.Text = "Print to File";
             this.btnPrint.UseVisualStyleBackColor = true;
@@ -262,10 +264,10 @@
             // lblMemory
             // 
             this.lblMemory.AutoSize = true;
-            this.lblMemory.Location = new System.Drawing.Point(1, 303);
+            this.lblMemory.Location = new System.Drawing.Point(1, 248);
             this.lblMemory.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblMemory.Name = "lblMemory";
-            this.lblMemory.Size = new System.Drawing.Size(0, 17);
+            this.lblMemory.Size = new System.Drawing.Size(0, 13);
             this.lblMemory.TabIndex = 7;
             // 
             // lblRamCounter
@@ -273,10 +275,10 @@
             this.lblRamCounter.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblRamCounter.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRamCounter.ForeColor = System.Drawing.Color.DarkOliveGreen;
-            this.lblRamCounter.Location = new System.Drawing.Point(1, 320);
+            this.lblRamCounter.Location = new System.Drawing.Point(1, 261);
             this.lblRamCounter.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblRamCounter.Name = "lblRamCounter";
-            this.lblRamCounter.Size = new System.Drawing.Size(112, 22);
+            this.lblRamCounter.Size = new System.Drawing.Size(84, 18);
             this.lblRamCounter.TabIndex = 8;
             this.lblRamCounter.Text = "Ram";
             this.lblRamCounter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -286,10 +288,10 @@
             this.lblCPU.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblCPU.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCPU.ForeColor = System.Drawing.Color.DarkOliveGreen;
-            this.lblCPU.Location = new System.Drawing.Point(1, 342);
+            this.lblCPU.Location = new System.Drawing.Point(1, 279);
             this.lblCPU.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblCPU.Name = "lblCPU";
-            this.lblCPU.Size = new System.Drawing.Size(114, 22);
+            this.lblCPU.Size = new System.Drawing.Size(86, 18);
             this.lblCPU.TabIndex = 9;
             this.lblCPU.Text = "CPU";
             this.lblCPU.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -309,12 +311,25 @@
             this.updateTimer.Interval = 1000;
             this.updateTimer.Tick += new System.EventHandler(this.UpdateTimer_Tick);
             // 
+            // cbxGuid
+            // 
+            this.cbxGuid.AutoSize = true;
+            this.cbxGuid.Location = new System.Drawing.Point(391, 1);
+            this.cbxGuid.Margin = new System.Windows.Forms.Padding(1);
+            this.cbxGuid.Name = "cbxGuid";
+            this.cbxGuid.Size = new System.Drawing.Size(121, 17);
+            this.cbxGuid.TabIndex = 7;
+            this.cbxGuid.Text = "ProjectGuid Number";
+            this.cbxGuid.UseVisualStyleBackColor = true;
+            this.cbxGuid.CheckedChanged += new System.EventHandler(this.All_CheckedChanged);
+            this.cbxGuid.MouseHover += new System.EventHandler(this.CbxGuid_MouseHover);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightBlue;
-            this.ClientSize = new System.Drawing.Size(962, 446);
+            this.ClientSize = new System.Drawing.Size(722, 362);
             this.Controls.Add(this.splitContainer1);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "Form1";
@@ -354,6 +369,7 @@
         private System.Windows.Forms.Timer updateTimer;
         private System.Windows.Forms.Label lblRamCounter;
         private System.Windows.Forms.Label lblCPU;
+        private System.Windows.Forms.CheckBox cbxGuid;
     }
 }
 

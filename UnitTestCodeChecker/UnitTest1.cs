@@ -1,6 +1,4 @@
-﻿using System;
-using CodeChecker;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using CodeChecker;
 
 namespace UnitTestCodeChecker
 {

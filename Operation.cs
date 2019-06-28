@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeChecker
 {
-    using System.Diagnostics;
     using F23.StringSimilarity;
+    using System.Diagnostics;
 
     public class Operation
     {
