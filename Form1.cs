@@ -22,18 +22,15 @@ namespace CodeChecker
         public Form1()
         {
             InitializeComponent();
-            InitialiseCPUCounter();
-            InitializeRAMCounter();
-            updateTimer.Start();
+            InitialiseCPURAMCounter();
+            updateTimer.Start(); //runs/updates the CPU and Ram checker every second
             HelpIntroText();
         }
 
         private void HelpIntroText()
         {
             lbxOutput.Items.AddRange(HelpText.IntroText().ToArray());
-
         }
-
 
 
         private async void BtnOpenDirectory_Click(object sender, EventArgs e)
@@ -68,17 +65,10 @@ namespace CodeChecker
                     btnRnPlagCheck.Enabled = true;
                     lbxOutput.Items.Add(this.Text + " Now press Check Files");
 
-
                     foreach (var file in ExtractFiles.AllFiles)
                     {
                         lbxOutput.Items.Add(file.Key.ToString());
-
-
                     }
-
-
-
-
                 }
             }));
         }
@@ -133,7 +123,7 @@ namespace CodeChecker
                 {
                     lbxOutput.Items.Add(output.ToString());
                 }
-
+                lbxOutput.Items.Insert(0, @"Lev Distance -- \File 1 -- -- \File 2 ");
                 this.Text += "File Path is " + ExtractFiles.docPath;
 
             }));
@@ -173,37 +163,31 @@ namespace CodeChecker
         }
 
 
-        private void CbxGuid_MouseHover(object sender, EventArgs e)
+        private void AllHelp_MouseHover(object sender, EventArgs e)
         {
-            ToolTip.SetToolTip(cbxGuid, "Each VS Project has a unique ProjectGuid ID in the .csproj file." + Environment.NewLine + "Lets compare them to see if a project has been copied");
-
+            ToolTipHelp();
         }
 
-        private void CbxSameFolder_MouseHover(object sender, EventArgs e)
+        private void ToolTipHelp()
         {
+            ToolTip.SetToolTip(cbxGuid,
+                "Each VS Project has a unique ProjectGuid ID in the .csproj file." + Environment.NewLine +
+                "Lets compare them to see if a project has been copied");
             ToolTip.SetToolTip(cbxSameFolder, "Compare files in the same folder");
-
-        }
-
-        private void CbxContains_MouseHover(object sender, EventArgs e)
-        {
             ToolTip.SetToolTip(cbxContains, "Checks if one file is contained in another file - experimental");
+            ToolTip.SetToolTip(txtLevSize,
+                "How many changes there are between files. " + Environment.NewLine +
+                "Smaller is more similar, bigger is less." + Environment.NewLine +
+                "Shows how many changes to make one file the same as another ");
+            ToolTip.SetToolTip(btnOpenDirectory,
+                "Choose a file in the top level of the folders, it will check every subfolder." + Environment.NewLine +
+                " Needs a file to click on." + Environment.NewLine +
+                "This also loads the files, so will need to be done when making changes to checkboxes ");
+            ToolTip.SetToolTip(btnRnPlagCheck,
+                "For large numbers of files leave this program open and make a coffee. " + Environment.NewLine +
+                "It's working hard ");
         }
 
-        private void TxtLevSize_MouseHover(object sender, EventArgs e)
-        {
-            ToolTip.SetToolTip(txtLevSize, "How many changes there are between files. " + Environment.NewLine + "Smaller is more similar, bigger is less." + Environment.NewLine + "Shows how many changes to make one file the same as another ");
-        }
-
-        private void BtnOpenDirectory_MouseHover(object sender, EventArgs e)
-        {
-            ToolTip.SetToolTip(btnOpenDirectory, "Choose a file in the top level of the folders, it will check every subfolder." + Environment.NewLine + " Needs a file to click on." + Environment.NewLine + "This also loads the files, so will need to be done when making changes to checkboxes ");
-        }
-
-        private void BtnRnPlagCheck_MouseHover(object sender, EventArgs e)
-        {
-            ToolTip.SetToolTip(btnRnPlagCheck, "For large numbers of files leave this program open and make a coffee. " + Environment.NewLine + "It's working hard ");
-        }
 
         private void UpdateTimer_Tick(object sender, EventArgs e)
         {
@@ -214,7 +198,7 @@ namespace CodeChecker
 
         //https://stackoverflow.com/questions/51392374/performancecounter-cpu-memory-like-task-manager
 
-        private void InitialiseCPUCounter()
+        private void InitialiseCPURAMCounter()
         {
             cpuCounter = new PerformanceCounter(
                 "Processor",
@@ -222,15 +206,19 @@ namespace CodeChecker
                 "_Total",
                 true
             );
-        }
 
-        private void InitializeRAMCounter()
-        {
             ramCounter = new PerformanceCounter(
                 "Memory",
                 "Available MBytes",
                 true);
 
+        }
+
+        private void CbxGuid_MouseHover(object sender, EventArgs e)
+        {
+
+            ToolTip.SetToolTip(cbxGuid, "Each VS Project has a unique ProjectGuid ID in the .csproj file." + Environment.NewLine +
+                                        "Lets compare them to see if a project has been copied");
         }
     }
 

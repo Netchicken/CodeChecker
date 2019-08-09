@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+
 
 namespace CodeChecker
 {
@@ -32,5 +35,7 @@ namespace CodeChecker
 
             return HelpIntro;
         }
+
+
     }
 }
